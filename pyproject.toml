@@ -1,7 +1,47 @@
 [project]
-name = "lab-01"
+name = "fxlab"
 version = "0.1.0"
-description = "Add your description here"
+description = "Research-grade FX systematic strategy lab"
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = []
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7,<3.0",
+    "pyyaml>=6.0.1,<7.0.0",
+    "ruff>=0.15.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.10,<2.0",
+    "pytest>=8.2,<9.0",
+    "ruff>=0.5,<1.0",
+]
+
+[project.scripts]
+fxlab = "fxlab.cli.main:main"
+
+[build-system]
+requires = ["hatchling>=1.25,<2.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fxlab"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+packages = ["fxlab"]
+strict = true

@@ -1,5 +1,12 @@
-def main():
-    print("Hello from lab-01!")
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from fxlab.cli.main import main  # noqa: E402,I001
 
 
 if __name__ == "__main__":

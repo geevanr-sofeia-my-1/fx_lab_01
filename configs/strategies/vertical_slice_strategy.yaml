@@ -1,0 +1,22 @@
+schema_version: "1"
+name: vertical_slice_demo
+pair_universe: [EURUSD]
+timeframe: 1H
+feature_set: [ema_length_3, rsi_length_3, atr_length_3]
+regime_filter:
+  type: greater_than
+  left:
+    kind: feature
+    name: close
+  right:
+    kind: feature
+    name: ema_length_3
+entry_trigger_rule:
+  type: greater_than
+  left:
+    kind: feature
+    name: close
+  right:
+    kind: value
+    value: 3.5
+shift_entry_signals: true
